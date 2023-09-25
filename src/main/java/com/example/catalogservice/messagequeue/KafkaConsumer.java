@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import java.util.Map;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class KafkaConsumer {
 
     private final CatalogRepository catalogRepository;
@@ -38,6 +40,6 @@ public class KafkaConsumer {
         if(entity != null){
             entity.setStock(entity.getStock() - (Integer)map.get("qty"));
         }
-        catalogRepository.save(entity);
+        //catalogRepository.save(entity);
     }
 }
